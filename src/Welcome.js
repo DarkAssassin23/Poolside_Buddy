@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login'
-import { PostData } from './PostData.js';
+import { PostData } from './PostData';
 import { Redirect } from 'react-router-dom';
 import './App.css';
 
@@ -17,7 +17,10 @@ class Welcome extends Component {
 
     signup(res, type) {
         let postData;
-        if (type === 'facebook' && res.email) {
+        console.log("in signup")
+        if (type === 'facebook' && res.name) {
+            console.log(res.name + "," + res.id);
+            window.open(`http://localhost:3000/Home.html?name=${res.name}`,"_self")
             postData = {
                 name: res.name,
                 provider: type,
@@ -28,7 +31,9 @@ class Welcome extends Component {
             };
         }
 
-        if (type === 'google' && res.w3.U3) {
+        if (type === 'google' ){//&& res.w3.U3) {
+            console.log(res.Pt.Ad)
+            window.open(`http://localhost:3000/Home.html?name=${res.Pt.Ad}`,"_self")
             postData = {
                 name: res.w3.ig,
                 provider: type,
@@ -57,6 +62,7 @@ class Welcome extends Component {
         const responseFacebook = (response) => {
             console.log("facebook console");
             console.log(response);
+            console.log("going to signup")
             this.signup(response, 'facebook');
         }
 
