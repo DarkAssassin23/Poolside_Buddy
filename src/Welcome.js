@@ -20,7 +20,7 @@ class Welcome extends Component {
         console.log("in signup")
         if (type === 'facebook' && res.name) {
             console.log(res.name + "," + res.id);
-            window.open(`http://localhost:3000/Home.html?name=${res.name}`,"_self")
+            window.open(`http://localhost:3000/home?name=${res.name}`,"_self");
             postData = {
                 name: res.name,
                 provider: type,
@@ -33,7 +33,7 @@ class Welcome extends Component {
 
         if (type === 'google' ){//&& res.w3.U3) {
             console.log(res.Pt.Ad)
-            window.open(`http://localhost:3000/Home.html?name=${res.Pt.Ad}`,"_self")
+            window.open(`http://localhost:3000/home?name=${res.Pt.Ad}`,"_self");
             postData = {
                 name: res.w3.ig,
                 provider: type,
