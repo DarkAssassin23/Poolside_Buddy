@@ -1,96 +1,57 @@
 import React, { Component } from 'react';
-import GoogleLogin from 'react-google-login'
-import FacebookLogin from 'react-facebook-login'
-import { PostData } from './PostData';
+import firebase, { initializeApp } from 'firebase';
+import StyleFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom';
 import './App.css';
+import {config} from './firebaseAuth';
+
+firebase.initializeApp(config);
 
 class Welcome extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loginError: false,
-            redirect: false
-        };
-        this.signup = this.signup.bind(this);
+
+    state = { isSignedIn: false };
+    uiConfig = {
+        signInFlow: "popup",
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.GithubAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        callbacks: {
+            signInSuccess : () => false
+        }
     }
 
-    signup(res, type) {
-        let postData;
-        console.log("in signup")
-        if (type === 'facebook' && res.name) {
-            console.log(res.name + "," + res.id);
-            window.open(`http://localhost:3000/home?name=${res.name}`,"_self");
-            postData = {
-                name: res.name,
-                provider: type,
-                email: res.email,
-                provider_id: res.id,
-                token: res.accessToken,
-                provider_pic: res.picture.data.url
-            };
-        }
-
-        if (type === 'google' ){//&& res.w3.U3) {
-            console.log(res.Pt.Ad)
-            window.open(`http://localhost:3000/home?name=${res.Pt.Ad}`,"_self");
-            postData = {
-                name: res.w3.ig,
-                provider: type,
-                email: res.w3.U3,
-                provider_id: res.El,
-                token: res.Zi.access_token,
-                provider_pic: res.w3.Paa
-            };
-        }
-
-        if (postData) {
-            PostData('signup', postData).then((result) => {
-                let responseJson = result;
-                sessionStorage.setItem("userData", JSON.stringify(responseJson));
-                this.setState({ redirect: true });
-            });
-        } else { }
+    componentDidMount = () =>{
+        firebase.auth().onAuthStateChanged(user => {
+            this.setState({isSignedIn:!!user});
+        })
     }
 
     render() {
-
-        if (this.state.redirect || sessionStorage.getItem('userData')) {
-            return (<Redirect to={'/home'} />)
-        }
-
-        const responseFacebook = (response) => {
-            console.log("facebook console");
-            console.log(response);
-            console.log("going to signup")
-            this.signup(response, 'facebook');
-        }
-
-        const responseGoogle = (response) => {
-            console.log("google console");
-            console.log(response);
-            this.signup(response, 'google');
-        }
 
         return (
             <div className="App">
 
                 <header className="App-header">
-                    <h1>Poolside Buddy</h1>
-                    <p>Sign in</p>
+                    {this.state.isSignedIn ?
+                        <div>
+                            <h1>Poolside Buddy</h1>
+                            <h3>Hello {firebase.auth().currentUser.displayName}!</h3>
+                            <button onClick={()=>firebase.auth().signOut()}>Sign Out</button>
+                        </div>
+                        :
+                        <div>
+                            <h1>Poolside Buddy</h1>
+                            <p>Sign in</p> 
+                            <StyleFirebaseAuth
+                                uiConfig={this.uiConfig}
+                                firebaseAuth = {firebase.auth()}
+                            />
+                        </div>
+                    }
 
-                    <FacebookLogin
-                        appId="579664726242177"
-                        autoLoad={false}
-                        fields="name,email,picture"
-                        callback={responseFacebook} />
-                    <p></p>
-
-                    <GoogleLogin
-                        clientId="418283014621-7boa88m2tvstf5jiastufnu0uq4ipcer.apps.googleusercontent.com"
-                        buttonText="Login with Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle} />
                 </header>
             </div>
         );

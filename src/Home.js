@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import './App.css';
 import publicIP from 'react-native-public-ip'
-//import { Redirect } from 'react-router-dom';
+import firebase, { initializeApp } from 'firebase';
+import { Redirect } from 'react-router-dom';
 class Home extends Component {
 
     constructor(props) {
@@ -21,34 +22,34 @@ class Home extends Component {
 
     componentDidMount() {
         publicIP()
-        .then(ip => {    
-          console.log(ip)
-          fetch(`http://ip-api.com/json/${ip}`)
-          .then(res => res.json())
-          .then((result) => {
-              console.log(result);
-              fetch("https://api.openweathermap.org/data/2.5/weather?lat="+result.lat+"&lon="+result.lon+"&appid=09cc85f823c17b23cdea7d3520183389")
-              .then(res => res.json())
-              .then((data) => {
-                  this.setState({
-                      weather: data,
-                      temp: data.main.temp,
-                      name: data.name,
-                      conditions: data.weather[0].description
-                  })
-              })
-              .catch(console.log)
-              this.setState({
-                  lat: result.lat,
-                  lon: result.lon
-              })
-          }).catch(console.log)
+            .then(ip => {
+                console.log(ip)
+                fetch(`http://ip-api.com/json/${ip}`)
+                    .then(res => res.json())
+                    .then((result) => {
+                        console.log(result);
+                        fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + result.lat + "&lon=" + result.lon + "&appid=09cc85f823c17b23cdea7d3520183389")
+                            .then(res => res.json())
+                            .then((data) => {
+                                this.setState({
+                                    weather: data,
+                                    temp: data.main.temp,
+                                    name: data.name,
+                                    conditions: data.weather[0].description
+                                })
+                            })
+                            .catch(console.log)
+                        this.setState({
+                            lat: result.lat,
+                            lon: result.lon
+                        })
+                    }).catch(console.log)
 
-        })
-        .catch(error => {
-          console.log(error);
-          // 'Unable to get IP address.'
-        })
+            })
+            .catch(error => {
+                console.log(error);
+                // 'Unable to get IP address.'
+            })
     }
 
     render() {
