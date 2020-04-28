@@ -1,7 +1,28 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DarkAssassin23_Poolside_Buddy&metric=alert_status)](https://sonarcloud.io/dashboard?id=DarkAssassin23_Poolside_Buddy)
+
+# Poolside Buddy
+
+
+About
+-------
+Poolside buddy is your go to helper to see if today is a good day to go the pool. Poolside Buddy is a secure way to get a personalized recommendation on whether or not it's a good day to go to the pool by logging in with your Facbook, Google, GitHub, or email.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+-----
 
+Setup
+------
+In order to download and run Poolside Buddy make sure you have node installed on your machine.
+
+Once downloaded, naviagte to the Poolside Buddy directory in your terminal and run
+```bash
+npm install
+```
+in order to install of the necessary dependencies
+
+Available Scripts
+------
 In the project directory, you can run:
 
 ### `npm start`
@@ -36,33 +57,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
