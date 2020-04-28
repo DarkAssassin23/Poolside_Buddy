@@ -7,8 +7,6 @@ About
 -------
 Poolside buddy is your go to helper to see if today is a good day to go the pool. Poolside Buddy is a secure way to get a personalized recommendation on whether or not it's a good day to go to the pool by logging in with your Facbook, Google, GitHub, or email.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 -----
 
 Setup
