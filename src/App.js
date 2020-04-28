@@ -8,7 +8,7 @@ import { config } from './firebaseAuth';
 firebase.initializeApp(config);
 
 class App extends Component {
-  
+
   state = { isSignedIn: false };
   uiConfig = {
     signInFlow: "popup",
