@@ -66,7 +66,12 @@ class App extends Component {
     };
 
     function poolDay(temp, conditions) {
-      if (temp < 70) {
+      console.log(temp);
+      
+      if(temp==null){
+        return "Unable to gather weather data"
+      }
+      else if (temp < 70) {
         return "Today is not a good day to go to the pool because it is too cold";
       }
       else if (temp > 70 && (conditions.includes("rain") || conditions.includes("drizzle") || conditions.includes("thunderstorm"))) {
