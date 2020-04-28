@@ -9,7 +9,9 @@ firebase.initializeApp(config);
 
 class App extends Component {
 
-  state = { isSignedIn: false };
+  state = { 
+    isSignedIn: false 
+  };
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [
@@ -29,11 +31,11 @@ class App extends Component {
     })
     publicIP()
       .then(ip => {
-        console.log(ip)
+        //console.log(ip)
         fetch(`http://ip-api.com/json/${ip}`)
           .then(res => res.json())
           .then((result) => {
-            console.log(result);
+            //console.log(result);
             fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + result.lat + "&lon=" + result.lon + "&appid=09cc85f823c17b23cdea7d3520183389")
               .then(res => res.json())
               .then((data) => {
@@ -63,24 +65,22 @@ class App extends Component {
       var frac = 9 / 5;
       var final = frac * (temp - 273) + 32;
       return Math.round(final);
-    };
+    }
 
-    function poolDay(temp, conditions) {
-      console.log(temp);
-      
+    function poolDay(temp, weatherConditions) {
       if(temp==null){
         return "Unable to gather weather data"
       }
       else if (temp < 70) {
         return "Today is not a good day to go to the pool because it is too cold";
       }
-      else if (temp > 70 && (conditions.includes("rain") || conditions.includes("drizzle") || conditions.includes("thunderstorm"))) {
+      else if (temp > 70 && (weatherConditions.includes("rain") || weatherConditions.includes("drizzle") || weatherConditions.includes("thunderstorm"))) {
         return "Today is not a good day to go to the pool because of inclimate weather";
       }
       else {
         return "Today is a good day to go to the pool"
       }
-    };
+    }
 
 
     let weatherDataTemp = kelvinToFahrenheit(this.state.temp);
