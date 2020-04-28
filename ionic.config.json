@@ -1,0 +1,7 @@
+{
+  "name": "poolside-buddy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
